@@ -107,7 +107,12 @@ opendoor
 
 In Options, you can change the device's accessibility, Blynk token, mount type, distance threshold, read interval, device name, HTTP port, and device key. Changing certain options (such as accessibility, token, HTTP port) requires a reboot.
 
+
+* Determine the Distance Threshold
+
 To determine the distance threshold, you should estimate the distance from OpenGarage sensor to the garage door when it's fully open (call this d1), and the distance to the top of the car when the car is parked in the garage (call this d2). Then set the threshold to be half way between d1 and d2. If you are not sure about d1 and d2, you can open the garage door, check the app or web interface for the distance reading (this is d1); then close the garage door, and check the distance again (this is d2). 
+
+By default the mount type is 'ceiling mount'. This way, when the distance reading is less than the threshold, the door is regarded as open. If you have selected to use 'side mount', the logic will be reversed: when the distance reading is less than the threshold, it's assumed the door is closed.
 
 
 Update Firmware:
