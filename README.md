@@ -3,6 +3,7 @@ This folder contains the OpenGarage firmware code for Arduino with ESP8266.
 
 For details, visit www.opengaragedoor.com
 
+![og_ap](Screenshots/og_ap.png)
 
 Updates:
 =======
