@@ -1,8 +1,7 @@
 /* OpenGarage Firmware
- * Copyright (C) 2015 by OpenGarageDoor.com
  *
  * Main loop
- * Mar 2016 @ OpenGarageDoor.com
+ * Mar 2016 @ OpenGarage.io
  *
  * This file is part of the OpenGarage library
  *

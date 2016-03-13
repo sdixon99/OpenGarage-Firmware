@@ -1,8 +1,7 @@
 /* OpenGarage Firmware
- * Copyright (C) 2015 by OpenGarageDoor.com
  *
  * OpenGarage library header file
- * Feb 2016 @ OpenSprinkler.com
+ * Mar 2016 @ OpenGarage.io
  *
  * This file is part of the OpenGarage library
  *

@@ -1,8 +1,7 @@
 /* OpenGarage Firmware
- * Copyright (C) 2015 by OpenGarageDoor.com
  *
  * ESPConnect header file
- * Feb 2016 @ OpenGarageDoor.com
+ * Mar 2016 @ OpenGarage.io
  *
  * This file is part of the OpenGarage library
  *

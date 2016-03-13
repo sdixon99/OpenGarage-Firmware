@@ -1,8 +1,7 @@
 /* OpenGarage Firmware
- * Copyright (C) 2015 by OpenGarageDoor.com
  *
  * OpenGarage macro defines and hardware pin assignments
- * Mar 2016 @ OpenGarageDoor.com
+ * Mar 2016 @ OpenGarage.io
  *
  * This file is part of the OpenGarage library
  *
