@@ -44,6 +44,7 @@ class OpenGarage {
 public:
   static OptionStruct options[];
   static byte state;
+  static byte alarm;
   static void begin();
   static void options_setup();
   static void options_load();
@@ -69,12 +70,16 @@ public:
   static bool read_log_start();
   static bool read_log_next(LogStruct& data);
   static bool read_log_end();
+  static void play_note(uint freq);
+  static void set_alarm() { alarm = options[OPTION_ALM].ival * 10 + 1; }
+  static void reset_alarm() { alarm = 0; }
 private:
   static ulong echo_time;
   static ulong read_distance_once();
   static File log_file;
   static void button_handler();
   static void led_handler();
+  static void play_startup_tune();
 };
 
 #endif  // _OPENGARAGE_H_

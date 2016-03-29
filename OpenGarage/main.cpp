@@ -229,7 +229,13 @@ void on_sta_change_controller() {
   }
   if(server->hasArg("click")) {
     server_send_result(HTML_SUCCESS);
-    og.click_relay();
+    if(!og.options[OPTION_ALM].ival) {
+      // if alarm is not enabled, trigger relay right away
+      og.click_relay();
+    } else {
+      // else, set alarm
+      og.set_alarm();
+    }
   }
   if(server->hasArg("reboot")) {
     server_send_result(HTML_SUCCESS);
@@ -582,6 +588,25 @@ void time_keeping() {
   }
 }
 
+void process_alarm() {
+  if(!og.alarm) return;
+  static ulong prev_half_sec = 0;
+  ulong curr_half_sec = millis()/500;
+  if(curr_half_sec != prev_half_sec) {  
+    prev_half_sec = curr_half_sec;
+    if(prev_half_sec % 2 == 0) {
+      og.play_note(ALARM_FREQ);
+    } else {
+      og.play_note(0);
+    }
+    og.alarm--;
+    if(og.alarm==0) {
+      og.play_note(0);
+      og.click_relay();
+    }
+  }
+}
+
 void do_loop() {
   static ulong connecting_timeout;
   
@@ -681,14 +706,24 @@ void do_loop() {
     check_status();
   }
   process_ui();
+  if(og.alarm)
+    process_alarm();
 }
 
 BLYNK_WRITE(V1)
 {
-  if(param.asInt()) {
-    og.set_relay(HIGH);
+  if(!og.options[OPTION_ALM].ival) {
+    // if alarm is disabled, trigger right away
+    if(param.asInt()) {
+      og.set_relay(HIGH);
+    } else {
+      og.set_relay(LOW);
+    }
   } else {
-    og.set_relay(LOW);
+    // otherwise, set alarm
+    if(param.asInt()) {
+      og.set_alarm();
+    }  
   }
 }
 
