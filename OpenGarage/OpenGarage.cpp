@@ -24,8 +24,7 @@
 
 ulong OpenGarage::echo_time;
 byte  OpenGarage::state = OG_STATE_INITIAL;
-File  OpenGarage::log_file;
-byte  OpenGarage::alarm = 0;
+File OpenGarage::log_file;
 
 static const char* config_fname = CONFIG_FNAME;
 static const char* log_fname = LOG_FNAME;
@@ -40,7 +39,6 @@ OptionStruct OpenGarage::options[] = {
   {"mnt", OG_MNT_CEILING,1, ""},
   {"dth", 50,        65535, ""},
   {"riv", 4,           300, ""},
-  {"alm", OG_ALM_5,      2, ""},
   {"htp", 80,        65535, ""},
   {"mod", OG_MOD_AP,   255, ""},
   {"ssid", 0, 0, ""},  // string options have 0 max value
@@ -53,9 +51,6 @@ OptionStruct OpenGarage::options[] = {
 void OpenGarage::begin() {
   digitalWrite(PIN_RESET, HIGH);
   pinMode(PIN_RESET, OUTPUT);
-  
-  digitalWrite(PIN_BUZZER, LOW);
-  pinMode(PIN_BUZZER, OUTPUT);
   
   digitalWrite(PIN_RELAY, LOW);
   pinMode(PIN_RELAY, OUTPUT);
@@ -74,8 +69,6 @@ void OpenGarage::begin() {
   if(!SPIFFS.begin()) {
     DEBUG_PRINTLN(F("failed to mount file system!"));
   }
-  
-  play_startup_tune();
 }
 
 void OpenGarage::options_setup() {
@@ -266,28 +259,4 @@ bool OpenGarage::read_log_end() {
   if(!log_file) return false;
   log_file.close();
   return true;
-}
-
-void OpenGarage::play_note(uint freq) {
-  if(freq>0) {
-    analogWrite(PIN_BUZZER, 512);
-    analogWriteFreq(freq);
-  } else {
-    analogWrite(PIN_BUZZER, 0);
-  }
-}
-
-#include "pitches.h"
-
-void OpenGarage::play_startup_tune() {
-  static uint melody[] = {NOTE_C4, NOTE_E4, NOTE_G4, NOTE_C5};
-  static byte duration[] = {4, 8, 8, 8};
-  
-  for (byte i = 0; i < sizeof(melody)/sizeof(uint); i++) {
-    uint delaytime = 1000/duration[i];
-    play_note(melody[i]);
-    delay(delaytime);
-    play_note(0);
-    delay(delaytime * 0.2);    // add 30% pause between notes
-  }
 }

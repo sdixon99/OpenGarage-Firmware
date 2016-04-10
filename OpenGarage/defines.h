@@ -33,7 +33,6 @@
 #define PIN_ECHO   14
 #define PIN_LED     2
 #define PIN_RESET  16
-#define PIN_BUZZER 13
 
 // Default device name
 #define DEFAULT_NAME    "My OpenGarage"
@@ -50,10 +49,6 @@
 
 #define OG_MNT_CEILING  0x00
 #define OG_MNT_SIDE     0x01
-
-#define OG_ALM_NONE     0x00
-#define OG_ALM_5        0x01
-#define OG_ALM_10       0x02
 
 #define OG_MOD_AP       0xA9
 #define OG_MOD_STA      0x2A
@@ -72,7 +67,7 @@
 #define BLYNK_PIN_RCNT  V4
 
 #define MAX_LOG_RECORDS    100
-#define ALARM_FREQ         1000
+
 // door status histogram
 // number of values (maximum is 8)
 #define DOOR_STATUS_HIST_K  4
@@ -88,7 +83,6 @@ typedef enum {
   OPTION_MNT,     // mount type
   OPTION_DTH,     // distance threshold
   OPTION_RIV,     // read interval
-  OPTION_ALM,     // alarm mode
   OPTION_HTP,     // http port
   OPTION_MOD,     // mode
   OPTION_SSID,    // wifi ssid
